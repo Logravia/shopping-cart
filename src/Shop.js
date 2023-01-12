@@ -1,6 +1,12 @@
-function Shop() {
+import ProductBox from './ProductBox'
+
+function Shop({products, putInCart}) {
  return (
-   <h1>Shop</h1>
+   <div className="shop">
+   {products.map(prod =>
+     <ProductBox data={prod} add={putInCart}/>
+   )}
+   </div>
  )
 }
 export default Shop
