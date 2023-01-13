@@ -24,7 +24,7 @@ function App() {
   }
 
   function removeFromCart(id){
-    let indexToRemove = cart.findIndex(item=>item.id===id)
+    let indexToRemove = cart.findIndex(item=>item.product.id===id)
     if (indexToRemove === -1) {console.log("No such item in cart"); return;}
 
     let updatedCart = [...cart]
@@ -36,8 +36,8 @@ function App() {
   function incrementCountBy(amount, id) {
     let updatedCart = [...cart]
     let item = getCartItem(id);
-    if (item) {
-      item.count += amount;
+    if (item && (item.amount + amount) > 0) {
+      item.amount += amount;
       setCart(updatedCart);
     } else {
       console.log("No such item exists")
@@ -45,7 +45,7 @@ function App() {
   }
 
   function isAlreadyInCart(id){
-    cart.find(cartItem=>cartItem.id === id);
+    return getCartItem(id) !== undefined
   }
 
   function getProduct(id) {
